@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ProjectCategory {
+  personal
+  professional
+  academic
+}
+
+model Project {
+  id          Int             @id @default(autoincrement())
+  title       String
+  slug        String          @unique
+  description String?
+  techStack   String[]
+  images      String[]
+  thumbnail   String?
+  githubUrl   String?
+  liveUrl     String?
+  category    ProjectCategory @default(personal)
+  year        Int?
+  highlight   Boolean         @default(false)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  @@map("projects")
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
