@@ -69,7 +69,7 @@ export default async function AdminDashboard() {
                   
                   {project.techStack.length > 0 && (
                     <div className="flex flex-wrap gap-2 mb-6">
-                      {project.techStack.map((tech) => (
+                      {project.techStack.map((tech: string) => (
                         <span 
                           key={tech} 
                           className="px-3 py-1 bg-gray-800 text-white rounded-full text-sm"
