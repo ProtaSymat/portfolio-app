@@ -4,33 +4,18 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import AdminHeader from './AdminHeader'
 
-interface Project {
-  id: number
-  title: string
-  slug: string
-  description: string
-  techStack: string[]
-  images: string[]
-  githubUrl: string | null
-  liveUrl: string | null
-  thumbnail: string | null
-  category: 'personal' | 'professional' | 'academic'
-  year: number | null
-  highlight: boolean
-}
-
 export default function EditProjectForm({ project }: { project: Project }) {
   const router = useRouter()
   const [formData, setFormData] = useState({
     title: project.title,
     slug: project.slug,
-    description: project.description,
+    description: project.description ?? '',  // null → ''
     techStack: project.techStack.join(', '),
     images: project.images.join(', '),
-    githubUrl: project.githubUrl || '',
-    liveUrl: project.liveUrl || '',
+    githubUrl: project.githubUrl ?? '',
+    liveUrl: project.liveUrl ?? '',
     category: project.category,
-    year: project.year?.toString() || '',
+    year: project.year?.toString() ?? '',
     highlight: project.highlight
   })
 
