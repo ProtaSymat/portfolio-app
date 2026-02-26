@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import AdminHeader from './AdminHeader'
 
 interface Project {
-  id: string
+  id: number
   title: string
   slug: string
   description: string
