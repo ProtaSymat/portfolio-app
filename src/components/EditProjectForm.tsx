@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import AdminHeader from './AdminHeader'
+import type { Project } from '@prisma/client'
 
 export default function EditProjectForm({ project }: { project: Project }) {
   const router = useRouter()
