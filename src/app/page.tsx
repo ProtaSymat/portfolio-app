@@ -8,8 +8,8 @@ export default async function Home() {
   })
 
   const highlightImages = highlights
-    .filter(p => p.images.length > 0)
-    .map(p => ({ src: p.images[0], slug: p.slug, title: p.title }))
+  .filter((p: any) => p.images.length > 0)
+  .map((p: any) => ({ src: p.images[0], slug: p.slug, title: p.title }))
 
   return <HomeClient highlightImages={highlightImages} />
 }
