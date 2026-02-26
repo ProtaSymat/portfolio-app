@@ -22,11 +22,11 @@ export default async function ProjectPage({
     orderBy: { id: 'asc' } //logique nn beugué mais à revoir si jamais on veut fair du tri par date ou autre
   })
 
-  const categoryLabel = {
-    personal: 'Personal',
-    professional: 'Professional',
-    academic: 'Academic'
-  }[project.category]
+const categoryLabel = {
+  personal: 'Personal',
+  professional: 'Professional',
+  academic: 'Academic'
+}[project.category as 'personal' | 'professional' | 'academic']
 
   return (
     <>
