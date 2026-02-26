@@ -50,7 +50,6 @@ function Lightbox({
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Close */}
       <button
         className="absolute top-4 right-4 md:top-5 md:right-6 text-white text-2xl md:text-3xl font-black hover:text-primary transition-colors z-10 w-10 h-10 flex items-center justify-center"
         onClick={onClose}
@@ -59,12 +58,10 @@ function Lightbox({
         ✕
       </button>
 
-      {/* Counter */}
       <span className="absolute top-4 left-4 md:top-5 md:left-6 text-white/50 text-xs md:text-sm uppercase tracking-widest font-semibold">
         {current + 1} / {images.length}
       </span>
 
-      {/* Prev — caché sur mobile (swipe à la place) */}
       {images.length > 1 && (
         <button
           className="hidden md:block absolute left-4 md:left-8 text-white/70 hover:text-white text-5xl font-black transition-colors z-10 select-none"
@@ -75,7 +72,6 @@ function Lightbox({
         </button>
       )}
 
-      {/* Image */}
       <div
         className="w-full mx-4 md:mx-16 max-w-5xl flex items-center justify-center"
         onClick={(e) => e.stopPropagation()}
@@ -89,7 +85,6 @@ function Lightbox({
         />
       </div>
 
-      {/* Next — caché sur mobile */}
       {images.length > 1 && (
         <button
           className="hidden md:block absolute right-4 md:right-8 text-white/70 hover:text-white text-5xl font-black transition-colors z-10 select-none"
@@ -100,14 +95,12 @@ function Lightbox({
         </button>
       )}
 
-      {/* Swipe hint mobile */}
       {images.length > 1 && (
         <p className="md:hidden absolute bottom-16 left-0 right-0 text-center text-white/30 text-xs uppercase tracking-widest">
           ← swipe →
         </p>
       )}
 
-      {/* Thumbnails — scroll horizontal sur mobile */}
       {images.length > 1 && (
         <div className="absolute bottom-4 left-0 right-0 flex justify-start md:justify-center gap-2 px-4 overflow-x-auto scrollbar-none">
           {images.map((img, i) => (
@@ -133,7 +126,6 @@ function Lightbox({
   )
 }
 
-// ── needs useRef for touch ────────────────────────────────────────────────────
 import { useRef } from 'react'
 
 export default function GalleryGrid({ images, title }: { images: string[]; title: string }) {

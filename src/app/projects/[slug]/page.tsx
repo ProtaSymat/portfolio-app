@@ -82,7 +82,7 @@ const categoryLabel = {
               <div className="mb-8 md:mb-10">
                 <p className="text-xs uppercase tracking-widest text-slate-400 font-semibold mb-3">Technologies</p>
                 <div className="flex flex-wrap gap-2">
-                  {project.techStack.map((tech) => (
+                  {project.techStack.map((tech: string) => (
                     <span key={tech} className="px-3 md:px-4 py-1.5 md:py-2 border border-primary text-primary text-xs md:text-sm font-semibold uppercase tracking-wide">
                       {tech}
                     </span>
