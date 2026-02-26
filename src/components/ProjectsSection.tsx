@@ -1,5 +1,5 @@
 'use client'
-import { useRef } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { RefObject } from 'react'
 
@@ -15,13 +15,11 @@ interface FloatingImageProps {
   textRef: RefObject<HTMLHeadingElement | null>
 }
 
-
 function FloatingImage({
   src, slug, title, taille,
   vitesse, amplitudeX, amplitudeY,
   inclinaison, textRef
 }: FloatingImageProps) {
-  const posRef = useRef({ x: 0, y: 0 })
   const divRef = useRef<HTMLDivElement>(null)
   const frameRef = useRef<number>(0)
   const startRef = useRef<number | null>(null)
@@ -53,14 +51,10 @@ function FloatingImage({
     frameRef.current = requestAnimationFrame(animate)
   }
 
-  const startAnimation = () => {
+  useEffect(() => {
     frameRef.current = requestAnimationFrame(animate)
-  }
-
-  const stopAnimation = () => {
-    cancelAnimationFrame(frameRef.current)
-    startRef.current = null
-  }
+    return () => cancelAnimationFrame(frameRef.current)
+  }, [amplitudeX, amplitudeY, vitesse, inclinaison, taille])
 
   return (
     <div
@@ -73,10 +67,6 @@ function FloatingImage({
         height: `${taille}px`,
         cursor: 'pointer',
         overflow: 'hidden',
-      }}
-      ref={(el) => {
-        (divRef as any).current = el
-        if (el) startAnimation()
       }}
     >
       <img
@@ -92,14 +82,31 @@ interface Props {
   images: { src: string; slug: string; title: string }[]
 }
 
-const configs = [
+const configsDesktop = [
   { taille: 220, vitesse: 32000, amplitudeX: 500, amplitudeY: 450, inclinaison: 0 },
   { taille: 180, vitesse: 21000, amplitudeX: 420, amplitudeY: 380, inclinaison: 30 },
   { taille: 160, vitesse: 44000, amplitudeX: 460, amplitudeY: 410, inclinaison: -42 },
 ]
 
+const configsMobile = [
+  { taille: 120, vitesse: 32000, amplitudeX: 200, amplitudeY: 180, inclinaison: 0 },
+  { taille: 100, vitesse: 21000, amplitudeX: 170, amplitudeY: 150, inclinaison: 30 },
+  { taille: 90,  vitesse: 44000, amplitudeX: 185, amplitudeY: 165, inclinaison: -42 },
+]
+
 export default function ProjectsSection({ images }: Props) {
   const textRef = useRef<HTMLHeadingElement>(null)
+  const [isLg, setIsLg] = useState(true)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)')
+    setIsLg(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsLg(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
+  const configs = isLg ? configsDesktop : configsMobile
 
   const titleStyle = {
     fontSize: 'clamp(48px, 8vw, 96px)',
@@ -114,7 +121,7 @@ export default function ProjectsSection({ images }: Props) {
   return (
     <section
       id="projects-section"
-      className="min-h-screen"
+      className="lg:min-h-screen py-30 lg:py-0"
       style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}
     >
       <div className="max-w-7xl mx-auto px-6" style={{ textAlign: 'center' }}>

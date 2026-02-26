@@ -30,7 +30,6 @@ export default function Skills() {
     useEffect(() => {
         if (!canvasRef.current) return
         const canvas = canvasRef.current
-
         const scene = new THREE.Scene()
         const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 100)
         camera.position.set(0, 0, -4)
@@ -126,19 +125,15 @@ export default function Skills() {
 
     return (
         <>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="lg:block hidden">
                 <path fill="#212120" fillOpacity="1" d="M0,64L60,96C120,128,240,192,360,197.3C480,203,600,149,720,144C840,139,960,181,1080,213.3C1200,245,1320,267,1380,277.3L1440,288L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z" />
             </svg>
 
-            <section ref={sectionRef} className="relative w-full bg-primary -mt-2 px-6">
-                <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
+            <section ref={sectionRef} className="relative w-full bg-primary lg:-mt-2 px-6 py-20 lg:py-10">
+                <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:gap-12">
 
-                    <div className="w-full md:w-1/2 flex justify-center items-center">
-                        <canvas
-                            ref={canvasRef}
-                            className="w-full max-w-sm"
-                            style={{ height: '600px' }}
-                        />
+                    <div className="hidden md:block w-full md:w-1/2 flex justify-center items-center">
+                        <canvas ref={canvasRef} className="w-full max-w-sm" style={{ height: '600px' }}/>
                     </div>
 
                     <div className="w-full md:w-1/2 flex flex-col gap-10">
@@ -164,7 +159,7 @@ export default function Skills() {
                 </div>
             </section>
 
-            <svg className="w-full block -mt-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <svg className="w-full hidden lg:block lg:-mt-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                 <path fill="#212120" fillOpacity="1" d="M0,192L48,192C96,192,192,192,288,197.3C384,203,480,213,576,202.7C672,192,768,160,864,138.7C960,117,1056,107,1152,101.3C1248,96,1344,96,1392,96L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z" />
             </svg>
         </>

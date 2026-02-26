@@ -85,7 +85,7 @@ export default function LogoSpinner({ onUnlock }: { onUnlock?: () => void }) {
   }, [isUnlocked]);
 
   return (
-    <div ref={containerRef} className="flex flex-row justify-center items-center gap-20">
+    <div ref={containerRef} className="flex md:flex-row flex-col justify-center items-center md:gap-20">
       <div className="relative">
         <div
           className="w-50 h-50 flex items-center justify-center"
@@ -94,12 +94,12 @@ export default function LogoSpinner({ onUnlock }: { onUnlock?: () => void }) {
             transition: 'transform 0.1s ease-out'
           }}
         >
-          <img src="/logo.svg" alt="Mathys" className="w-full h-full object-contain" />
+          <img src="/logo.svg" alt="Mathys" className="md:max-w-50 md:max-h-50 max-w-35 max-h-35 object-contain" />
         </div>
       </div>
 
       <div className="text-left">
-        <h1 className="text-7xl font-black font-neue">
+        <h1 className="md:text-7xl text-5xl font-black font-neue">
           Mathys<br />Girault
         </h1>
       </div>

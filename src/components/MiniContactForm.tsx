@@ -63,17 +63,17 @@ export default function ContactForm() {
 
       <h2 className="contact-title relative z-10 mb-6 text-center">CONTACT</h2>
 
-      <form onSubmit={handleSubmit} noValidate className="relative z-[5] flex flex-col px-5 sm:px-2">
+      <form onSubmit={handleSubmit} noValidate className="relative z-[5] flex flex-col px-5">
         <div className="d-flex">
         <div className="w-60">
-          <div className="field-wrap field-wrap--name w-50 self-start ml-[8%] z-[3] sm:w-full sm:self-stretch sm:ml-0 sm:mb-0 sm:[transform:rotate(0deg)!important]">
+          <div className="field-wrap field-wrap--name w-50 self-start z-[3]">
             <input id="name" type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Name :" autoComplete="name" className={`field-input${errors.name ? ' border-red-600' : ''}`}/>
             {errors.name && <span className="field-error">{errors.name}</span>}
           </div>
         </div>
         
         <div className="w-80 mt-5">
-          <div className="field-wrap field-wrap--email w-3/4 self-center ml-[16%] z-[2] sm:w-full sm:self-stretch sm:ml-0 sm:mb-0 sm:[transform:rotate(0deg)!important]">
+          <div className="field-wrap field-wrap--email w-3/4 self-center z-[2]">
             <input id="email" type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email :" autoComplete="email" className={`field-input${errors.email ? ' border-red-600' : ''}`}/>
             {errors.email && <span className="field-error">{errors.email}</span>}
           </div>
@@ -84,7 +84,7 @@ export default function ContactForm() {
           <textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Message :" rows={6} className={`field-input field-wrap field-wrap--message resize-none min-h-[150px]${errors.message ? ' border-red-600' : ''}`}/>
           {errors.message && <span className="field-error">{errors.message}</span>}
           <div className="send-btn mt-4">
-            <button type="submit" disabled={isLoading} aria-label="Envoyer le message" className="w-fit text-secondary font-akira gap-1.5 whitespace-nowrap bg-primary text-sm px-5 py-2.5 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed sm:static sm:w-full sm:justify-center sm:text-base sm:py-3.5 sm:[transform:rotate(0deg)]"> 
+            <button type="submit" disabled={isLoading} aria-label="Envoyer le message" className="w-fit text-secondary font-akira gap-1.5 whitespace-nowrap bg-primary text-sm px-5 py-2.5 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed"> 
             {isLoading ? <span className="inline-block border-2 border-secondary/30 border-t-secondary rounded-full animate-spin" /> : <>SEND →</>}
           </button>
           </div>

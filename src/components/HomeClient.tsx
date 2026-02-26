@@ -34,39 +34,39 @@ export default function HomeClient({ highlightImages }: { highlightImages: { src
       <Header isUnlocked={isUnlocked} />
       <main className="relative h-screen">
         <section className="h-screen flex flex-col justify-center items-center relative overflow-hidden">
-          <div className="text-left">
+          <div className="text-left hidden md:block">
             <ParisClock />
           </div>
           <div className="z-10">
             <LogoSpinner onUnlock={() => setIsUnlocked(true)} />            
           </div>
             <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center">
-              <div className="w-8 h-8 rounded-full border-2 border-primary flex items-center justify-center">
+              <div className="md:w-8 md:h-8 w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center">
                 <motion.div
-                  className="w-3 h-3 rounded-full bg-primary"
-                  animate={{ y: [0, 9, 0] }}
+                  className="md:w-3 md:h-3 w-2 h-2 rounded-full bg-primary"
+                  animate={{ y: [0, window.innerWidth < 768 ? 7 : 9, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
               </div>
             </div>
         </section>
 
-        <section className="min-h-screen bg-secondary relative overflow-hidden">
+        <section className="lg:min-h-screen bg-secondary relative overflow-hidden">
 
           <div className="absolute top-20 left-10 w-72 h-72 bg-purple-300 mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
           <div className="absolute top-40 right-10 w-72 h-72 bg-blue-300 mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
           <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-pink-300 mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
 
-          <div className="relative z-10 pt-14">
+          <div className="relative z-10 md:pt-14 pt-0">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true, amount: 0.3 }}
-              className="mb-15"
+              className="lg:mb-15"
             >
               <svg
-                className="w-full block"
+                className="w-full hidden lg:block"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 1440 320"
               >
@@ -77,7 +77,7 @@ export default function HomeClient({ highlightImages }: { highlightImages: { src
                 />
               </svg>
 
-              <div className="bg-primary text-white px-8 md:px-16 py-20 relative overflow-hidden -mt-35">
+              <div className="bg-primary text-white px-8 md:px-16 py-20 relative overflow-hidden lg:-mt-35">
                 <div className="relative z-10">
                   <motion.h2
                     initial={{ opacity: 0, x: -50 }}
@@ -111,7 +111,7 @@ export default function HomeClient({ highlightImages }: { highlightImages: { src
                 </div>
               </div>
               <svg
-                className="w-full block -mt-25" 
+                className="w-full hidden lg:block lg:-mt-25" 
                 xmlns="http://www.w3.org/2000/svg" 
                 viewBox="0 0 1440 320"
               >
@@ -126,7 +126,7 @@ export default function HomeClient({ highlightImages }: { highlightImages: { src
         </section>
         <ProjectsSection images={highlightImages} />
         <Skills />
-        <section className="py-32" id="contact">
+        <section className="lg:py-20 py-15" id="contact">
             <MiniContactForm />
         </section>
 

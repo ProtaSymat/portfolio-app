@@ -17,6 +17,8 @@
 /.next/
 /out/
 
+/scripts/create-admin.ts
+
 # production
 /build
 
