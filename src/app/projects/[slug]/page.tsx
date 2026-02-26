@@ -2,6 +2,7 @@ import { prisma } from '@/lib/prisma'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Header from '@/components/Header'
+import GalleryGrid from '@/components/GalleryGrid'
 
 export default async function ProjectPage({
   params
@@ -18,7 +19,7 @@ export default async function ProjectPage({
 
   const nextProject = await prisma.project.findFirst({
     where: { id: { gt: project.id } },
-    orderBy: { id: 'asc' }
+    orderBy: { id: 'asc' } //logique nn beugué mais à revoir si jamais on veut fair du tri par date ou autre
   })
 
   const categoryLabel = {
@@ -35,17 +36,11 @@ export default async function ProjectPage({
           <div className="border border-primary p-6 md:p-10 lg:p-16">
 
             <div className="flex items-center justify-between mb-6 md:hidden">
-              <Link
-                href="/projects"
-                className="text-primary text-sm font-semibold uppercase tracking-widest"
-              >
+              <Link href="/projects" className="text-primary text-sm font-semibold uppercase tracking-widest">
                 ← Back
               </Link>
               {nextProject && (
-                <Link
-                  href={`/projects/${nextProject.slug}`}
-                  className="text-slate-400 text-sm font-semibold uppercase tracking-widest"
-                >
+                <Link href={`/projects/${nextProject.slug}`} className="text-slate-400 text-sm font-semibold uppercase tracking-widest">
                   Next →
                 </Link>
               )}
@@ -72,17 +67,11 @@ export default async function ProjectPage({
               </div>
 
               <div className="hidden md:flex flex-col items-end gap-4 min-w-fit ml-8">
-                <Link
-                  href="/projects"
-                  className="flex items-center gap-2 text-primary hover:underline text-sm font-semibold uppercase tracking-widest"
-                >
+                <Link href="/projects" className="flex items-center gap-2 text-primary hover:underline text-sm font-semibold uppercase tracking-widest">
                   ← Back
                 </Link>
                 {nextProject && (
-                  <Link
-                    href={`/projects/${nextProject.slug}`}
-                    className="flex items-center gap-2 text-slate-400 hover:text-primary hover:underline text-sm font-semibold uppercase tracking-widest transition-colors text-right"
-                  >
+                  <Link href={`/projects/${nextProject.slug}`} className="flex items-center gap-2 text-slate-400 hover:text-primary hover:underline text-sm font-semibold uppercase tracking-widest transition-colors text-right">
                     Next: {nextProject.title} →
                   </Link>
                 )}
@@ -91,15 +80,10 @@ export default async function ProjectPage({
 
             {project.techStack.length > 0 && (
               <div className="mb-8 md:mb-10">
-                <p className="text-xs uppercase tracking-widest text-slate-400 font-semibold mb-3">
-                  Technologies
-                </p>
+                <p className="text-xs uppercase tracking-widest text-slate-400 font-semibold mb-3">Technologies</p>
                 <div className="flex flex-wrap gap-2">
                   {project.techStack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 md:px-4 py-1.5 md:py-2 border border-primary text-primary text-xs md:text-sm font-semibold uppercase tracking-wide"
-                    >
+                    <span key={tech} className="px-3 md:px-4 py-1.5 md:py-2 border border-primary text-primary text-xs md:text-sm font-semibold uppercase tracking-wide">
                       {tech}
                     </span>
                   ))}
@@ -109,22 +93,14 @@ export default async function ProjectPage({
 
             <div className="flex flex-wrap gap-3 mb-8 md:mb-10">
               {project.githubUrl && (
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 md:px-6 py-2.5 md:py-3 border border-primary text-primary hover:bg-primary hover:text-white transition-all font-semibold uppercase tracking-widest text-xs md:text-sm"
-                >
+                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" // revoir p-e icon
+                  className="px-4 md:px-6 py-2.5 md:py-3 border border-primary text-primary hover:bg-primary hover:text-white transition-all font-semibold uppercase tracking-widest text-xs md:text-sm">
                   GitHub
                 </a>
               )}
               {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 md:px-6 py-2.5 md:py-3 bg-primary text-white hover:opacity-80 transition-all font-semibold uppercase tracking-widest text-xs md:text-sm"
-                >
+                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
+                  className="px-4 md:px-6 py-2.5 md:py-3 bg-primary text-white hover:opacity-80 transition-all font-semibold uppercase tracking-widest text-xs md:text-sm">
                   Live Demo →
                 </a>
               )}
@@ -134,36 +110,19 @@ export default async function ProjectPage({
               <>
                 <div className="border-t border-primary my-8 md:my-10" />
                 <div className="mb-8 md:mb-10">
-                  <p className="text-xs uppercase tracking-widest text-slate-400 font-semibold mb-3 md:mb-4">
-                    Description
-                  </p>
-                  <p
-                    className="text-sm md:text-lg text-slate-700 leading-relaxed"
-                    dangerouslySetInnerHTML={{ __html: project.description }}
-                  />
+                  <p className="text-xs uppercase tracking-widest text-slate-400 font-semibold mb-3 md:mb-4">Description</p>
+                  <p className="text-sm md:text-lg text-slate-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: project.description }} />
                 </div>
               </>
             )}
 
             {project.images.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                {project.images.map((img, i) => (
-                  <img
-                    key={i}
-                    src={img}
-                    alt={`${project.title} - image ${i + 1}`}
-                    className="w-full h-full object-cover rounded-lg"
-                  />
-                ))}
-              </div>
+              <GalleryGrid images={project.images} title={project.title} />
             )}
 
             {nextProject && (
               <div className="mt-10 pt-6 border-t border-primary md:hidden">
-                <Link
-                  href={`/projects/${nextProject.slug}`}
-                  className="flex items-center justify-between text-slate-400 hover:text-primary transition-colors"
-                >
+                <Link href={`/projects/${nextProject.slug}`} className="flex items-center justify-between text-slate-400 hover:text-primary transition-colors">
                   <span className="text-xs uppercase tracking-widest font-semibold">Next project</span>
                   <span className="text-sm font-semibold uppercase tracking-widest">{nextProject.title} →</span>
                 </Link>
