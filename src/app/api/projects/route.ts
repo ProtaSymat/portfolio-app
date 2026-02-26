@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     const body = await request.json()
     
     const techStack = typeof body.techStack === 'string' 
-      ? body.techStack.split(',').map(t => t.trim()).filter(Boolean)
+      ? body.techStack.split(',').map((t: string) => t.trim()).filter(Boolean)
       : body.techStack || []
 
     const images = Array.isArray(body.images) 
