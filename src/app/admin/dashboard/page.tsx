@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 import { prisma } from '@/lib/prisma'
 import AdminHeader from '@/components/AdminHeader'
 import DeleteButton from '@/components/DeleteButton'
-import type { Project } from '@prisma/client'
+type Project = Awaited<ReturnType<typeof prisma.project.findMany>>[number]
 
 export default async function AdminDashboard() {
   const cookieStore = await cookies()
