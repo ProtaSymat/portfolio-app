@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 import { prisma } from '@/lib/prisma'
 import AdminHeader from '@/components/AdminHeader'
 import DeleteButton from '@/components/DeleteButton'
+import type { Project } from '@prisma/client'
 
 export default async function AdminDashboard() {
   const cookieStore = await cookies()
@@ -53,7 +54,7 @@ export default async function AdminDashboard() {
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {projects.map((project) => (
+              {projects.map((project: Project) => (
                 <div 
                   key={project.id} 
                   className="bg-primary rounded-2xl p-8 border border-white hover:border-gray-300 hover:shadow-2xl transition-all duration-300"
