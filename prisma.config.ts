@@ -1,5 +1,8 @@
 import path from 'path'
 import { defineConfig } from 'prisma/config'
+import { config } from 'dotenv'
+
+config()
 
 export default defineConfig({
   schema: path.join('prisma', 'schema.prisma'),

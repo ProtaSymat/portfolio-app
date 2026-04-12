@@ -44,7 +44,7 @@ export default function HomeClient({ highlightImages }: { highlightImages: { src
               <div className="md:w-8 md:h-8 w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center">
                 <motion.div
                   className="md:w-3 md:h-3 w-2 h-2 rounded-full bg-primary"
-                  animate={{ y: [0, window.innerWidth < 768 ? 7 : 9, 0] }}
+animate={{ y: [0, typeof window !== 'undefined' && window.innerWidth < 768 ? 7 : 9, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
               </div>
