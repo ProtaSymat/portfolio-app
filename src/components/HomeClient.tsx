@@ -32,7 +32,7 @@ export default function HomeClient({ highlightImages }: { highlightImages: { src
     <>
     <PageTransition>
       <Header isUnlocked={isUnlocked} />
-      <main className="relative h-screen">
+      <main className="relative">
         <section className="h-screen flex flex-col justify-center items-center relative overflow-hidden">
           <div className="text-left hidden md:block">
             <ParisClock />
