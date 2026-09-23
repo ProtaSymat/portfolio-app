@@ -3,6 +3,8 @@ import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
+const learningSkills = new Set(['COBOL', 'C#'])
+
 const skills = {
     'Front-end': [
         'HTML5', 'CSS3', 'SASS', 'Bootstrap', 'Tailwind CSS',
@@ -13,7 +15,8 @@ const skills = {
         'PHP', 'SQL', 'MySQL', 'PostgreSQL', 'NoSQL',
         'Symfony', 'CakePHP', 'Laravel', 'Node.js', 'NestJS',
         'Prisma', 'Postman', 'Docker', 'Jenkins', 'Git',
-        'WordPress', 'Shopify', 'Wix', 'REST API'
+        'WordPress', 'Shopify', 'Wix', 'REST API',
+        'COBOL', 'C#'
     ],
     'Autres': [
         'Lua', 'Microservices', 'CI/CD', 'Agile', 'Scrum',
@@ -146,9 +149,10 @@ export default function Skills() {
                                     {items.map((skill) => (
                                         <span
                                             key={skill}
+                                            title={learningSkills.has(skill) ? 'En cours d\'apprentissage' : undefined}
                                             className="px-3 py-1 border border-secondary text-secondary text-xs font-semibold uppercase tracking-widest rounded-sm hover:bg-secondary hover:text-primary transition-colors duration-200 cursor-default"
                                         >
-                                            {skill}
+                                            {skill}{learningSkills.has(skill) && '*'}
                                         </span>
                                     ))}
                                 </div>
