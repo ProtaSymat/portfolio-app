@@ -98,7 +98,7 @@ animate={{ y: [0, typeof window !== 'undefined' && window.innerWidth < 768 ? 7 :
                     transition={{ duration: 0.8, delay: 0.4 }}
                     className="text-xl md:text-2xl mb-6 font-white font-neue"
                   >
-                    Based in Paris, France
+                    Based in Montpellier, France
                   </motion.p>
 
                   <motion.p
